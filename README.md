@@ -3,4 +3,4 @@
 </div>
 
 # infra
-The home of my declaratively defined personal infrastructure & network setup. This is still actively being worked on, as most of it still needs to be migrated to this repo.
+The home of my declarative personal infrastructure & network setup. This is still actively being worked on, as most of it still needs to be migrated to this repo
