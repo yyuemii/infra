@@ -1,14 +1,11 @@
 {
-  config,
-  lib,
-  pkgs,
   ...
 }:
 {
-  imports = [
-    ../common
-  ];
+  name = "asteria";
+  system = "aarch64-linux";
 
-  networking.hostName = "asteria";
-  networking.searchDomain = "lu.mi";
+  modules = [
+    ./configuration.nix
+  ];
 }
