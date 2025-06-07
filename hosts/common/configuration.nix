@@ -6,9 +6,11 @@ let
 in
 {
   networking.domain = lib.mkDefault "lu.mi";
-  networking.useDHCP = lib.mkDefault true;
 
-  nixpkgs.config.allowUnfree = true; # allows nvidia drivers for nixos-hardware
+  networking.useDHCP = lib.mkDefault true;
+  networking.useNetworkd = true; # handles fqdn properly
+
+  nixpkgs.config.allowUnfree = true; # nvidia drivers :(
 
   environment.systemPackages = map lib.lowPrio [
     pkgs.vim
