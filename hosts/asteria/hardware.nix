@@ -15,7 +15,7 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-              mountOptions = [ "umask=0077" ];
+              # mountOptions = [ "umask=0077" ];
             };
           };
           root = {
@@ -31,16 +31,14 @@
     };
   };
 
-  # below generated using nixos-generate-config, with some minor modifications
+  # below config sourced from asterias nixos-generate-config, with some minor modifications
 
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
-  boot.loader.grub = {
-    enable = true;
-    efiSupport = true;
-    device = "nodev";
-  };
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"
