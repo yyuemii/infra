@@ -5,31 +5,29 @@ let
   ];
 in
 {
-  config = {
-    networking.domain = lib.mkDefault "lu.mi";
-    networking.useDHCP = lib.mkDefault true;
+  networking.domain = lib.mkDefault "lu.mi";
+  networking.useDHCP = lib.mkDefault true;
 
-    nixpkgs.config.allowUnfree = true; # allows nvidia drivers for nixos-hardware
+  nixpkgs.config.allowUnfree = true; # allows nvidia drivers for nixos-hardware
 
-    environment.systemPackages = map lib.lowPrio [
-      pkgs.vim
-      pkgs.curl
-      pkgs.gitMinimal
-    ];
+  environment.systemPackages = map lib.lowPrio [
+    pkgs.vim
+    pkgs.curl
+    pkgs.gitMinimal
+  ];
 
-    users.users = {
-      brianna = {
-        isNormalUser = true;
-        extraGroups = [ "wheel" ];
+  users.users = {
+    brianna = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
 
-        openssh.authorizedKeys.keys = authorizedKeys;
-      };
-
-      root = {
-        openssh.authorizedKeys.keys = authorizedKeys;
-      };
+      openssh.authorizedKeys.keys = authorizedKeys;
     };
 
-    services.openssh.enable = true;
+    root = {
+      openssh.authorizedKeys.keys = authorizedKeys;
+    };
   };
+
+  security.sudo.wheelNeedsPassword = false;
 }
