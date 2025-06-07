@@ -1,0 +1,59 @@
+{ config, modulesPath, ... }:
+{
+  disko.devices.disk = {
+    nvme0n1 = {
+      # asteria will only ever have one physical nvme slot due to its hardware configuration
+      device = "/dev/nvme0n1";
+      type = "disk";
+      content = {
+        type = "gpt";
+        partitions = {
+          esp = {
+            size = "500M";
+            type = "EF00";
+            content = {
+              type = "filesystem";
+              format = "vfat";
+              mountpoint = "/boot";
+              mountOptions = [ "umask=0077" ];
+            };
+          };
+          root = {
+            size = "100%";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/";
+            };
+          };
+        };
+      };
+    };
+  };
+
+  # below generated using nixos-generate-config, with some minor modifications
+
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/nvme0n1";
+    efiSupport = true;
+  };
+
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "thunderbolt"
+    "nvme"
+    "usb_storage"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
+
+  hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
+
+  nixpkgs.hostPlatform = "x86_64-linux";
+}

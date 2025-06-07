@@ -1,16 +1,20 @@
 {
-  nixpkgs,
+  inputs,
   ...
 }:
 let
-  inherit (nixpkgs) lib;
+  inherit (inputs.nixpkgs) lib;
 
   hosts = {
-    asteria = import ./asteria { inherit lib; };
+    asteria = import ./asteria { inherit inputs lib; };
   };
 
   # standard pre-requisites for any infra host
-  systemModules = [ ];
+  systemModules = [
+    inputs.disko.nixosModules.disko
+    (import ./common)
+  ];
+
 in
 {
   nixosConfigurations = (
@@ -19,7 +23,7 @@ in
       lib.nixosSystem {
         inherit (host) system;
 
-        modules = systemModules ++ host.modules ++ import ./common { inherit lib; };
+        modules = systemModules ++ host.modules;
       }
     ) hosts
   );
