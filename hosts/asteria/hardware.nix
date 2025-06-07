@@ -38,8 +38,8 @@
   ];
   boot.loader.grub = {
     enable = true;
-    device = "/dev/nvme0n1";
     efiSupport = true;
+    device = "nodev";
   };
 
   boot.initrd.availableKernelModules = [

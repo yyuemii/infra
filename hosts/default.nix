@@ -10,7 +10,7 @@ let
   };
 
   # standard pre-requisites for any infra host
-  systemModules = [
+  defaultModules = [
     inputs.disko.nixosModules.disko
     (import ./common)
   ];
@@ -23,7 +23,7 @@ in
       lib.nixosSystem {
         inherit (host) system;
 
-        modules = systemModules ++ host.modules;
+        modules = defaultModules ++ host.modules;
       }
     ) hosts
   );
