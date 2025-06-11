@@ -49,6 +49,9 @@
 
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
+              nixos-anywhere
+              nixos-rebuild
+
               opnix
             ];
           };
