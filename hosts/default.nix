@@ -12,6 +12,7 @@ let
   # standard pre-requisites for any infra host
   defaultModules = [
     inputs.disko.nixosModules.disko
+    inputs.opnix.nixosModules.default
     (import ./common)
   ];
 
@@ -24,6 +25,9 @@ in
         inherit (host) system;
 
         modules = defaultModules ++ host.modules;
+        specialArgs = {
+          inherit inputs;
+        };
       }
     ) hosts
   );

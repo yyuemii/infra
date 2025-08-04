@@ -10,4 +10,12 @@
   };
 
   services.fwupd.enable = true;
+
+  # always ensure the opnix agent is running for dependent services
+  services.onepassword-secrets = {
+    enable = true;
+    tokenFile = "/etc/opnix-token";
+
+    secrets = { };
+  };
 }
