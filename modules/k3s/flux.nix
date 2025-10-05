@@ -64,15 +64,17 @@ in
           apiVersion: kustomize.toolkit.fluxcd.io/v1
           kind: Kustomization
           metadata:
-            name: flux-bootstrap
+            name: apps
             namespace: flux-system
           spec:
             interval: 1m
-            path: ./apps/flux
-            prune: false
+            path: ./apps
+            prune: true
             sourceRef:
               kind: GitRepository
               name: flux-system
+            timeout: 2m
+            wait: true
           EOF
         '';
       };
