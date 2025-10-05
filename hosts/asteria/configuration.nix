@@ -7,6 +7,17 @@
   networking.hostName = "asteria"; # asteria.lu.mi
   networking.wireless.enable = false;
 
+  networking.firewall = {
+    enable = true;
+
+    interfaces = {
+      enp0s31f6 = {
+        allowedTCPPorts = [ 22 80 443 ];
+        allowedUDPPorts = [ 443 ];
+      };
+    };
+  };
+
   time.timeZone = "America/New_York";
 
   environment.systemPackages = [
