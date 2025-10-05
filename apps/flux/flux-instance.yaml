@@ -1,0 +1,17 @@
+apiVersion: fluxcd.io/v1
+kind: FluxInstance
+metadata:
+  name: flux
+  namespace: flux-system
+spec:
+  targetNamespace: flux-system
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./apps
+  components:
+    - source-controller
+    - kustomize-controller
+    - helm-controller
+    - notification-controller
+  interval: 1m

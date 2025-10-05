@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -9,12 +10,26 @@ in
 {
   services.k3s = {
     enable = cfg.enable;
+    
+    tokenFile = config.services.onepassword-secrets.secretPaths.k3sToken;
 
     role = "server";
-    tokenFile = config.services.onepassword-secrets.secretPaths.k3sToken;
+    extraFlags = [
+      "--tls-san=${config.networking.hostName}"
+      "--tls-san=${config.networking.hostName}.${config.networking.domain}"
+      "--cluster-domain=${config.networking.domain}"
+      "--cluster-cidr=${cfg.clusterSubnet}"
+      "--service-cidr=${cfg.servicesSubnet}"
+    ];
   };
 
-  networking.firewall.allowedTCPPorts = [ 6443 ];
+  environment.systemPackages = with pkgs; lib.mkIf cfg.enable [
+    kubectl
+  ];
+
+  networking.firewall.allowedTCPPorts = lib.mkIf cfg.enable [
+    6443
+  ];
 
   services.onepassword-secrets.secrets = lib.mkIf cfg.enable {
     k3sToken = {
