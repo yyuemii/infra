@@ -23,7 +23,6 @@ in
     extraFlags = [
       "--tls-san=${config.networking.hostName}"
       "--tls-san=${config.networking.hostName}.${config.networking.domain}"
-      "--cluster-cidr=${cfg.clusterSubnet}"
     ];
   };
 
