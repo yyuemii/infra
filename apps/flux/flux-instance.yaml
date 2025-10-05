@@ -1,4 +1,4 @@
-apiVersion: fluxcd.io/v1
+apiVersion: fluxcd.controlplane.io/v1
 kind: FluxInstance
 metadata:
   name: flux

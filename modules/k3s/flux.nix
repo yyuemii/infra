@@ -45,7 +45,7 @@ in
           # install flux resources into namespace
           flux install --namespace=flux-system
 
-          # setup flux to pull from git repo
+          # setup git repo source for flux to sync with
           kubectl apply -f - <<EOF
           apiVersion: source.toolkit.fluxcd.io/v1
           kind: GitRepository
@@ -53,10 +53,26 @@ in
             name: flux-system
             namespace: flux-system
           spec:
-            interval: 30s
+            interval: 1m
             url: ${cfg.repository}
             ref:
               branch: main
+          EOF
+
+          # bootstrap flux
+          kubectl apply -f - <<EOF
+          apiVersion: kustomize.toolkit.fluxcd.io/v1
+          kind: Kustomization
+          metadata:
+            name: flux-bootstrap
+            namespace: flux-system
+          spec:
+            interval: 1m
+            path: ./apps/flux
+            prune: false
+            sourceRef:
+              kind: GitRepository
+              name: flux-system
           EOF
         '';
       };
