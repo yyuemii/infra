@@ -24,26 +24,40 @@ in
         KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
       };
 
+      path = with pkgs; [ 
+        kubectl 
+        kubernetes-helm 
+        fluxcd
+      ];
+
       serviceConfig = {
         Type = "oneshot";
 
         Restart = "on-failure";
-        RestartSec = 5;
+        RestartSec = "30s";
 
-        ExecStart = pkgs.writeShellScript "flux-bootstrap" ''
+        ExecStart = pkgs.writeShellScript "flux-bootstrap.sh" ''
           set -e
 
-          if ! ${pkgs.kubectl}/bin/kubectl get ns flux-system >/dev/null 2>&1; then
-            ${pkgs.fluxcd}/bin/flux bootstrap github \
-              --owner=${cfg.repository.owner} \
-              --repository=${cfg.repository.name} \
-              --branch=main \
-              --path=${cfg.repository.path} \
-              --private=false \
-              --personal=true \
-          else
-            echo "Flux is already bootstrapped; exiting"
-          fi
+          # init flux system namespace
+          kubectl create namespace flux-system --dry-run=client -o yaml | kubectl apply -f -
+
+          # install flux resources into namespace
+          flux install --namespace=flux-system
+
+          # setup flux to pull from git repo
+          kubectl apply -f - <<EOF
+          apiVersion: source.toolkit.fluxcd.io/v1
+          kind: GitRepository
+          metadata:
+            name: flux-system
+            namespace: flux-system
+          spec:
+            interval: 30s
+            url: ${cfg.repository}
+            ref:
+              branch: main
+          EOF
         '';
       };
     };

@@ -24,21 +24,9 @@
     fluxcd = {
       enable = lib.mkEnableOption "Enable fluxcd module";
 
-      repository = {
-        owner = lib.mkOption {
-          type = lib.types.str;
-          description = "Owner of the repository";
-        };
-
-        name = lib.mkOption {
-          type = lib.types.str;
-          description = "Name of the repository";
-        };
-
-        path = lib.mkOption {
-          type = lib.types.str;
-          description = "Path to use for syncing";
-        };
+      repository = lib.mkOption {
+        type = lib.types.str;
+        description = "URL of the repository";
       };
     };
   };

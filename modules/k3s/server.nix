@@ -8,6 +8,12 @@ let
   cfg = config.services.lumi.k3s;
 in
 {
+  environment.systemPackages = with pkgs; [
+    kubectl
+    kubernetes-helm
+    kustomize
+  ];
+
   services.k3s = {
     enable = cfg.enable;
     
@@ -22,10 +28,6 @@ in
       "--service-cidr=${cfg.servicesSubnet}"
     ];
   };
-
-  environment.systemPackages = with pkgs; lib.mkIf cfg.enable [
-    kubectl
-  ];
 
   networking.firewall.allowedTCPPorts = lib.mkIf cfg.enable [
     6443

@@ -13,12 +13,7 @@
     fluxcd = {
       enable = true;
 
-      repository = {
-        owner = "yyuemii";
-        name = "infra";
-
-        path = "apps";
-      };
+      repository = "https://github.com/yyuemii/infra.git";
     };
   };
 }
