@@ -35,8 +35,12 @@ in
       reference = "op://lumi/pw-k3s-token/token";
       mode = "0600";
       services = [ "k3s" ];
-      # owner = "k3s";
-      # group = "k3s";
     };
+
+    opToken = {
+      reference = "op://lumi/pw-op-operator/token";
+      mode = "0600";
+      services = [ "k3s" ];
+  };
   };
 }
