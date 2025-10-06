@@ -6,6 +6,9 @@
 }:
 let
   cfg = config.services.lumi.k3s;
+
+  namespace = "op-connect";
+  secret = "op-connect";
 in
 {
   # only enable if core k3s is enabled
@@ -50,13 +53,15 @@ in
           set -e
 
           # init secrets namespace
-          kubectl create namespace op-connect
+          kubectl create namespace ${namespace} --dry-run=client -o yaml | kubectl apply -f -
 
           # setup secrets for 1password-credentials.json and access token
-          kubectl create secret generic op-connect \
-            --namespace=op-connect \
-            --from-file=credentials=${config.services.onepassword-secrets.secretPaths.opConnectCredentials} \
-            --from-file=token=${config.services.onepassword-secrets.secretPaths.opConnectToken}
+          if ! kubectl get secret ${secret} --namespace=${namespace} &> /dev/null; then
+            kubectl create secret generic ${secret} \
+              --namespace=${namespace} \
+              --from-file=credentials=${config.services.onepassword-secrets.secretPaths.opConnectCredentials} \
+              --from-file=token=${config.services.onepassword-secrets.secretPaths.opConnectToken}
+          fi
         '';
       };
     };

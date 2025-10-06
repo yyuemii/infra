@@ -1,9 +1,11 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: connect
   namespace: op-connect
 spec:
+  interval: 1h
+  timeout: 5m
   chart:
     spect:
       chart: connect
