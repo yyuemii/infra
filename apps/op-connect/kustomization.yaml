@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: op-connect
 resources:
   - ./resources/namespace.yaml
-  - ./helm/repositoryzz.yaml
+  - ./helm/repository.yaml
   - ./helm/chart.yaml
 secretGenerator:
   - name: op-token
