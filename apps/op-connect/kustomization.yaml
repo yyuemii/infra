@@ -3,21 +3,10 @@ kind: Kustomization
 namespace: op-connect
 resources:
   - ./resources/namespace.yaml
+  - ./helm/repositoryzz.yaml
+  - ./helm/chart.yaml
 secretGenerator:
   - name: op-token
     files:
       - /var/lib/opnix/secrets/k3sToken # TODO: unhardcode somehow
     type: Opaque
-helmCharts:
-  - name: connect
-    repo: https://1password.github.io/connect-helm-charts/
-    releaseName: op-connect
-    namespace: op-connect
-    valuesInline:
-      operator:
-        create: true
-        authMethod: service-account
-        serviceAccountToken:
-          name: op-token
-      connect:
-        create: false

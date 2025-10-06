@@ -1,0 +1,21 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmChart
+metadata:
+  name: connect
+  namespace: op-connect
+spec:
+  chart: connect
+  interval: 1h
+  sourceRef:
+    kind: HelmRepository
+    name: 1password
+    namespace: op-connect
+  values:
+    connect:
+      connect:
+        create: false
+      operator:
+        create: true
+        authMethod: service-account
+        serviceAccountToken:
+          name: op-token
