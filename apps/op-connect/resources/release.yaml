@@ -4,17 +4,17 @@ metadata:
   name: connect
   namespace: op-connect
 spec:
+  releaseName: connect
   interval: 1h
   timeout: 5m
   chart:
-    spect:
+    spec:
       chart: connect
       sourceRef:
         kind: HelmRepository
         name: 1password
         namespace: op-connect
       interval: 1h
-  releaseName: connect
   values:
     connect:
       credentials:
