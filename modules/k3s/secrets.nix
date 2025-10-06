@@ -50,7 +50,7 @@ in
           set -e
 
           # init secrets namespace
-          kubectl create namespace op-connect --dry-run=client -o yaml | kubectl apply -f -
+          kubectl create namespace op-connect
 
           # setup secrets for 1password-credentials.json and access token
           kubectl create secret generic op-connect \
