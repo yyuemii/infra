@@ -2,11 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: op-connect
 resources:
-  - ./resources/namespace.yaml
   - ./helm/repository.yaml
   - ./helm/chart.yaml
-secretGenerator:
-  - name: op-token
-    files:
-      - /var/lib/opnix/secrets/k3sToken # TODO: unhardcode somehow
-    type: Opaque
+  - ./resources/namespace.yaml

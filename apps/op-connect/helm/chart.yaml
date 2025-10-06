@@ -13,9 +13,11 @@ spec:
   values:
     connect:
       connect:
-        create: false
+        credentials:
+          name: op-connect
+          key: credentials
       operator:
         create: true
-        authMethod: service-account
-        serviceAccountToken:
-          name: op-token
+        token:
+          name: op-connect
+          key: token

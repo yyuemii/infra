@@ -6,3 +6,4 @@ metadata:
 spec:
   url:  https://1password.github.io/connect-helm-charts/
   interval: 1h
+  timeout: 5m

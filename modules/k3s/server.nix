@@ -32,15 +32,9 @@ in
 
   services.onepassword-secrets.secrets = lib.mkIf cfg.enable {
     k3sToken = {
-      reference = "op://lumi/pw-k3s-token/token";
+      reference = "op://lumi/infra-k3s-token/token";
       mode = "0600";
       services = [ "k3s" ];
     };
-
-    opToken = {
-      reference = "op://lumi/pw-op-operator/token";
-      mode = "0600";
-      services = [ "k3s" ];
-  };
   };
 }

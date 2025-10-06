@@ -4,6 +4,7 @@
 }:
 {
   imports = [
+    ./secrets.nix
     ./server.nix
     ./flux.nix
   ];
