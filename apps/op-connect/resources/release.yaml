@@ -17,9 +17,8 @@ spec:
       interval: 1h
   values:
     connect:
-      credentials:
-        name: op-connect
-        key: credentials
+      credentialsName: op-connect
+      credentialsKey: op-connect
     operator:
       create: true
       token:
