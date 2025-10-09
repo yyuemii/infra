@@ -18,6 +18,7 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: step-ca-values
+      valuesKey: values.yaml
     - kind: Secret
       name: authority
       valuesKey: root-ca

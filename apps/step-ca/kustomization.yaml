@@ -6,7 +6,3 @@ resources:
   - ./resources/namespace.yaml
   - ./resources/release.yaml
   - ./secrets/authority.yaml
-secretGenerator:
-  - name: step-ca-values
-    files:
-      - ./values/step-ca.yaml
