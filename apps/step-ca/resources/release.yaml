@@ -15,23 +15,23 @@ spec:
         name: smallstep
         namespace: step-ca
       interval: 1h
-  valuesFrom:
-    - kind: ConfigMap
-      name: step-ca-values
-      valuesKey: step-ca.yaml
-    - kind: Secret
-      name: authority
-      valuesKey: root-ca
-      targetPath: inject.certificates.root_ca
-    - kind: Secret
-      name: authority
-      valuesKey: root-ca-key
-      targetPath: inject.secrets.x509.root_ca_key
-    - kind: Secret
-      name: authority
-      valuesKey: intermediate-ca-key
-      targetPath: inject.secrets.x509.intermediate_ca_key
-    - kind: Secret
-      name: authority
-      valuesKey: password
-      targetPath: inject.secrets.ca_password
+  values:
+    ca:
+      name: Lumi
+
+    existingSecrets:
+      enabled: true
+      ca: true
+      issuer: false
+      certsAsSecret: true
+      configAsSecret: true
+      sshHostCa: false
+      sshUserCa: false
+
+    bootstrap:
+      secrets: false
+      enabled: false
+      configmaps: false
+
+    inject:
+      enabled: false
