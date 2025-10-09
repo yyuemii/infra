@@ -4,7 +4,6 @@ metadata:
   name: step-ca
   namespace: step-ca
 spec:
-  fullnameOverride: step-ca
   releaseName: step-ca
   interval: 1h
   timeout: 5m
@@ -17,6 +16,8 @@ spec:
         namespace: step-ca
       interval: 1h
   values:
+    fullnameOverride: step-ca
+
     ca:
       name: Lumi
 
