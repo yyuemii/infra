@@ -6,3 +6,11 @@ resources:
   - ./resources/namespace.yaml
   - ./resources/release.yaml
   - ./secrets/authority.yaml
+configMapGenerator:
+- name: step-ca-values
+  namespace: step-ca
+  files:
+  - ./values/step-ca.yaml
+  options:
+    disableNameSuffixHash: true
+    immutable: false
