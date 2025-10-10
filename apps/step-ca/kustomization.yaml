@@ -6,7 +6,6 @@ resources:
   - ./resources/namespace.yaml
   - ./resources/release.yaml
   - ./secrets/authority.yaml
-  - ./secrets/config.yaml
 generatorOptions:
   disableNameSuffixHash: true
 secretGenerator:
