@@ -7,3 +7,10 @@ resources:
   - ./resources/release.yaml
   - ./secrets/authority.yaml
   - ./secrets/config.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+secretGenerator:
+  - name: step-ca-config
+    files:
+      - ca.json=./secrets/ca.json
+      - defaults.json=./secrets/defaults.json
