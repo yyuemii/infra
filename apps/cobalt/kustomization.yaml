@@ -6,3 +6,5 @@ resources:
   - ./resources/deployment.yaml
   - ./resources/service.yaml
   - ./resources/ingress.yaml
+  - ./secrets/cookies.yaml
+  - ./secrets/turnstile.yaml

@@ -17,6 +17,16 @@ spec:
                 name: cobalt
                 port:
                   number: 80
+    - host: cobalt.yyuemii.co
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: cobalt
+                port:
+                  number: 80
   tls:
     - hosts:
         - cobalt.on.lu.mi

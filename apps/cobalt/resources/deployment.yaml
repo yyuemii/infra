@@ -20,6 +20,30 @@ spec:
             - containerPort: 9000
           env:
             - name: API_URL
-              value: https://cobalt.on.lu.mi
-            # - name: COOKIE_PATH
-            #   value: /cookies.json
+              value: https://cobalt.yyuemii.co
+            - name: COOKIE_PATH
+              value: /cookies.json
+            - name: TURNSTILE_SITEKEY
+              valueFrom:
+                secretKeyRef:
+                  name: turnstile
+                  key: username
+            - name: TURNSTILE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: turnstile
+                  key: credential
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: turnstile
+                  key: secret
+          volumeMounts:
+            - name: cookies
+              mountPath: /app/cookies.json
+              subPath: cookies.json
+              readOnly: true
+      volumes:
+        - name: cookies
+          secret:
+            secretName: cookies
