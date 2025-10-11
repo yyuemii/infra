@@ -4,7 +4,6 @@ metadata:
   name: whoami
   namespace: whoami
   annotations:
-    kubernetes.io/ingress.class: traefik
     cert-manager.io/cluster-issuer: stepca-issuer
 spec:
   rules:
@@ -18,3 +17,7 @@ spec:
                 name: whoami
                 port:
                   number: 80
+  tls:
+    - hosts:
+        - whoami.on.lu.mi
+      secretName: cert-whoami-ingress
