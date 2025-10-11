@@ -5,7 +5,7 @@ resources:
   - ./helm/repository.yaml
   - ./resources/namespace.yaml
   - ./resources/release.yaml
-  - ./resources/cluster-issuer.yaml
+  # - ./resources/cluster-issuer.yaml
   - ./secrets/authority.yaml
 generatorOptions:
   disableNameSuffixHash: true
