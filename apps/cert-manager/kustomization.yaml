@@ -5,3 +5,4 @@ resources:
   - ./helm/repository.yaml
   - ./resources/namespace.yaml
   - ./resources/release.yaml
+  - ./secrets/certificates.yaml
