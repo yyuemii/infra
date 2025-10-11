@@ -18,3 +18,12 @@ spec:
       interval: 1h
   values:
     installCRDs: true
+extraVolumes:
+  - name: ca-volume
+    secret:
+      secretName: step-ca-certs
+extraVolumeMounts:
+  - name: ca-volume
+    mountPath: /etc/ssl/certs/lumi-root-ca.crt
+    subPath: root_ca.crt
+    readOnly: true
