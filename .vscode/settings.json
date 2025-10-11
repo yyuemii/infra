@@ -4,6 +4,9 @@
     "editor.formatOnSave": true,
     "editor.tabSize": 2,
   },
+  "[terraform]": {
+    "editor.formatOnSave": true,
+  },
   "nix.enableLanguageServer": true,
   "nix.serverPath": "nil",
   "nix.serverSettings": {
