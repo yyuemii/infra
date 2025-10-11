@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cobalt
+  namespace: cobalt
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cobalt
+  template:
+    metadata:
+      labels:
+        app: cobalt
+    spec:
+      containers:
+        - name: cobalt
+          image: ghcr.io/imputnet/cobalt:11
+          ports:
+            - containerPort: 9000
+          env:
+            - name: API_URL
+              value: https://cobalt.on.lu.mi
+            # - name: COOKIE_PATH
+            #   value: /cookies.json
