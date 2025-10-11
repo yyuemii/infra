@@ -6,7 +6,7 @@ metadata:
   annotations:
     operator.1password.io/auto-restart: "true"
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: cobalt
