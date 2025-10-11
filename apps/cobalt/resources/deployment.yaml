@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: cobalt
-          image: ghcr.io/imputnet/cobalt:11
+          image: ghcr.io/imputnet/cobalt:staging
           ports:
             - containerPort: 9000
           env:
