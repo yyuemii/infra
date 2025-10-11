@@ -2,12 +2,11 @@ apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: stepca-issuer
-  namespace: cert-manager
+  namespace: step-ca
 spec:
   acme:
     email: lumi@yyuemii.co
     server: https://step-ca.step-ca.svc.cluster.local/acme/acme/directory
-    caBundle: LS0tLS1DRUdJTiBDRVJUSUZJEXAMPLE2UE11OWN4ckRNYWpQTlRTbkxCcEkxd1K4VnQ3SHBSK3A5b1JUTEzKcXxBPqotLSVOEXAMPLEUSUZJQ0FURS0tLS0tCg==
     privateKeySecretRef:
       name: step-ca-acme-account
     solvers:
