@@ -23,8 +23,8 @@ spec:
           env:
             - name: API_URL
               value: https://cobalt.yyuemii.co
-            - name: COOKIE_PATH
-              value: /app/cookies.json
+            # - name: COOKIE_PATH
+            #   value: /app/cookies.json
             - name: TURNSTILE_SITEKEY
               valueFrom:
                 secretKeyRef:
@@ -40,12 +40,12 @@ spec:
                 secretKeyRef:
                   name: turnstile
                   key: secret
-          volumeMounts:
-            - name: cookies
-              mountPath: /app/cookies.json
-              subPath: cookies.json
-              readOnly: true
-      volumes:
-        - name: cookies
-          secret:
-            secretName: cookies
+          # volumeMounts:
+          #   - name: cookies
+          #     mountPath: /app/cookies.json
+          #     subPath: cookies.json
+          #     readOnly: true
+      # volumes:
+      #   - name: cookies
+      #     secret:
+      #       secretName: cookies
