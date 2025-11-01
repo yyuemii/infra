@@ -7,7 +7,7 @@ in
 {
   networking.domain = lib.mkDefault "lu.mi";
 
-  networking.useDHCP = lib.mkDefault true;
+  networking.useDHCP = lib.mkDefault false;
   networking.useNetworkd = true; # handles fqdn properly
 
   nixpkgs.config.allowUnfree = true; # nvidia drivers :(

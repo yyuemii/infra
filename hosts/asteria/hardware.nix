@@ -51,7 +51,15 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  networking.interfaces.enp0s31f6.useDHCP = true;
+  networking.interfaces.enp0s31f6 = {
+    useDHCP = false;
+    ipv4.addresses = [
+      {
+        address = "10.0.10.2";
+        prefixLength = 24;
+      }
+    ];
+  };
   networking.interfaces.wlp0s20f3.useDHCP = false; # wifi
 
   hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
