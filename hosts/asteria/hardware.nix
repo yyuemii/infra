@@ -62,6 +62,9 @@
   };
   networking.interfaces.wlp0s20f3.useDHCP = false; # wifi
 
+  networking.defaultGateway = "10.0.10.1";
+  networking.nameservers = [ "10.0.10.1" ];
+
   hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
 
   nixpkgs.hostPlatform = "x86_64-linux";
