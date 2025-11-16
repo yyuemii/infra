@@ -1,0 +1,26 @@
+- name: Home
+  hide-desktop-navigation: true
+  columns:
+    - size: small
+      widgets:
+        - type: calendar
+          first-day-of-week: monday
+
+    - size: full
+      widgets:
+        - type: group
+          widgets:
+            - type: hacker-news
+            - type: lobsters
+
+    - size: small
+      widgets:
+        - type: weather
+          location: New York
+          units: imperial
+          hour-format: 12h
+
+        - type: releases
+          cache: 1d
+          repositories:
+            - ghostty-org/ghostty

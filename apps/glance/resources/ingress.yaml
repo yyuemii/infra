@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: glance
+  namespace: glance
+  annotations:
+    cert-manager.io/cluster-issuer: stepca-issuer
+spec:
+  rules:
+    - host: home.on.lu.mi
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: glance
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - home.on.lu.mi
+      secretName: cert-home-ingress

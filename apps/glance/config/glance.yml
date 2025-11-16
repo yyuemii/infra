@@ -1,0 +1,13 @@
+server:
+  assets-path: /app/assets
+
+theme:
+  light: true
+  background-color: 220 23 95
+  contrast-multiplier: 1.0
+  primary-color: 220 91 54
+  positive-color: 109 58 40
+  negative-color: 347 87 44
+
+pages:
+  - $include: home.yml
