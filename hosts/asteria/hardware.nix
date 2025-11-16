@@ -62,7 +62,10 @@
   };
   networking.interfaces.wlp0s20f3.useDHCP = false; # wifi
 
-  networking.defaultGateway = "10.0.10.1";
+  networking.defaultGateway = {
+    address = "10.0.10.1";
+    interface = "enp0s31f6";
+  };
   networking.nameservers = [ "10.0.10.1" ];
 
   hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
