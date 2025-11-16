@@ -10,7 +10,7 @@
             - timezone: America/Los_Angeles
               label: San Francisco
             - timezone: Europe/London
-              label: Londo
+              label: London
 
         - type: calendar
           first-day-of-week: monday
@@ -23,7 +23,7 @@
             - title: YouTube
               shortcut: "!yt"
               url: https://www.youtube.com/results?search_query={QUERY}
-            - title: GitHub
+            - title: Github
               shortcut: "!gh"
               url: https://github.com/search?q={QUERY}&type=code
             - title: Grep
@@ -36,7 +36,6 @@
         - type: group
           widgets:
             - type: hacker-news
-            - type: lobsters
 
     - size: small
       widgets:
@@ -45,17 +44,14 @@
           units: imperial
           hour-format: 12h
 
-        - type: markets
-          chart-link-template: https://www.tradingview.com/chart/?symbol={SYMBOL}
-          symbol-link-template: https://www.google.com/search?tbm=nws&q={SYMBOL}
-          markets:
-            - symbol: SPY
-              name: S&P 500
-            - symbol: FSKAX
-              name: FSKAX
-            - symbol: NVDA
-              name: NVIDIA
-            - symbol: NET
-              name: Cloudflare
-            - symbol: UI
-              name: Ubiquiti
+        - type: bookmarks
+          groups:
+            - links:
+                - title: Twitter
+                  url: https://x.com/
+                - title: Gmail
+                  url: https://gmail.com/
+                - title: Github
+                  url: https://github.com/
+                - title: YouTube
+                  url: https://youtube.com/
