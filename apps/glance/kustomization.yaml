@@ -6,6 +6,7 @@ resources:
   - ./resources/deployment.yaml
   - ./resources/service.yaml
   - ./resources/ingress.yaml
+  - ./secrets/location.yaml
 configMapGenerator:
   - name: glance-config
     files:

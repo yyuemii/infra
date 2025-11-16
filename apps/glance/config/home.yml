@@ -1,13 +1,38 @@
 - name: Home
-  hide-desktop-navigation: true
   columns:
     - size: small
       widgets:
+        - type: clock
+          hour-format: 12h
+          timezones:
+            - timezone: America/New_York
+              label: New York
+            - timezone: America/Los_Angeles
+              label: San Francisco
+            - timezone: Europe/London
+              label: Londo
+
         - type: calendar
           first-day-of-week: monday
 
     - size: full
       widgets:
+        - type: search
+          search-engine: google
+          bangs:
+            - title: YouTube
+              shortcut: "!yt"
+              url: https://www.youtube.com/results?search_query={QUERY}
+            - title: GitHub
+              shortcut: "!gh"
+              url: https://github.com/search?q={QUERY}&type=code
+            - title: Grep
+              shortcut: "!grep"
+              url: https://grep.app/search?q={QUERY}
+        - type: videos
+          channels:
+            - UCMwGHR0BTZuLsmjY_NT5Pwg # @ninomaeinanis
+            - UCcHHkJ98eSfa5aj0mdTwwLQ # @mintfantome
         - type: group
           widgets:
             - type: hacker-news
@@ -16,11 +41,21 @@
     - size: small
       widgets:
         - type: weather
-          location: New York
+          location: ${WEATHER_LOCATION}
           units: imperial
           hour-format: 12h
 
-        - type: releases
-          cache: 1d
-          repositories:
-            - ghostty-org/ghostty
+        - type: markets
+          chart-link-template: https://www.tradingview.com/chart/?symbol={SYMBOL}
+          symbol-link-template: https://www.google.com/search?tbm=nws&q={SYMBOL}
+          markets:
+            - symbol: SPY
+              name: S&P 500
+            - symbol: FSKAX
+              name: FSKAX
+            - symbol: NVDA
+              name: NVIDIA
+            - symbol: NET
+              name: Cloudflare
+            - symbol: UI
+              name: Ubiquiti

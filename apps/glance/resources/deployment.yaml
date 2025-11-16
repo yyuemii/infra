@@ -21,6 +21,12 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /app/config
+          env:
+            - name: WEATHER_LOCATION # lol
+              valueFrom:
+                secretKeyRef:
+                  name: location
+                  key: location
       volumes:
         - configMap:
             name: glance-config

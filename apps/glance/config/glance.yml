@@ -1,10 +1,8 @@
 theme:
   light: true
-  background-color: 220 23 95
-  contrast-multiplier: 1.0
-  primary-color: 220 91 54
-  positive-color: 109 58 40
-  negative-color: 347 87 44
+  background-color: 0 0 95
+  primary-color: 0 0 10
+  negative-color: 0 90 50
 
 pages:
   - $include: home.yml
