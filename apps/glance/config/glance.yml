@@ -1,6 +1,3 @@
-server:
-  assets-path: /app/assets
-
 theme:
   light: true
   background-color: 220 23 95
