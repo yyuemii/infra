@@ -15,7 +15,7 @@ in
 
     systemd.services.flux-bootstrap = {
       description = "Bootstraps FluxCD onto k3s";
-      
+
       after = [ "k3s.service" ];
       wants = [ "k3s.service" ];
       wantedBy = [ "multi-user.target" ];
@@ -24,9 +24,9 @@ in
         KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
       };
 
-      path = with pkgs; [ 
-        kubectl 
-        kubernetes-helm 
+      path = with pkgs; [
+        kubectl
+        kubernetes-helm
         fluxcd
       ];
 

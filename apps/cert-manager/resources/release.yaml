@@ -28,7 +28,3 @@ spec:
         mountPath: /etc/ssl/certs/ca-certificates.crt
         subPath: root_ca.crt
         readOnly: true
-  dependsOn:
-    - name: connect
-      namespace: op-connect
-  wait: true

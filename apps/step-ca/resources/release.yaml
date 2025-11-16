@@ -37,7 +37,3 @@ spec:
 
     inject:
       enabled: false
-  dependsOn:
-    - name: cert-manager
-      namespace: cert-manager
-  wait: true
