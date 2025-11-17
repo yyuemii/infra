@@ -60,7 +60,7 @@
       }
     ];
   };
-  networking.interfaces.wlp0s20f3.useDHCP = false; # wifi
+  systemd.network.netdevs.wlp0s20f3.enable = false; # wifi
 
   networking.defaultGateway = {
     address = "10.0.10.1";
