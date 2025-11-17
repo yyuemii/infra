@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ../../modules/k3s
+    ../common/k3s
   ];
 
   services.lumi.k3s = {
