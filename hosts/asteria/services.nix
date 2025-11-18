@@ -11,6 +11,7 @@
       enable = true;
 
       repository = "https://github.com/yyuemii/infra.git";
+      path = "./services";
     };
   };
 }

@@ -7,6 +7,9 @@
   "[terraform]": {
     "editor.formatOnSave": true,
   },
+  "[yaml]": {
+    "editor.formatOnSave": true
+  },
   "nix.enableLanguageServer": true,
   "nix.serverPath": "nil",
   "nix.serverSettings": {

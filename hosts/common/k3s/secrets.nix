@@ -29,7 +29,7 @@ in
 
     systemd.services.secrets-bootstrap = {
       description = "Bootstraps necessary secrets for k3s to function properly";
-      
+
       after = [ "k3s.service" ];
       wants = [ "k3s.service" ];
       wantedBy = [ "multi-user.target" ];
@@ -38,8 +38,8 @@ in
         KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
       };
 
-      path = with pkgs; [ 
-        kubectl 
+      path = with pkgs; [
+        kubectl
         kubernetes-helm
       ];
 
@@ -67,5 +67,4 @@ in
     };
   };
 
-  
 }

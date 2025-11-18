@@ -1,0 +1,53 @@
+## core services have a hiearchy of flux kustomizations, as most hard require something to be reconciled first
+
+# onepassword is used as our secrets store, install first
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: services-core-op-connect
+  namespace: flux-system
+spec:
+  interval: 1m
+  path: ./apps/core/op-connect
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: repo
+  timeout: 1m
+  wait: true
+---
+# cert manager is used to manage and request ingress certificates
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: services-core-cert-manager
+  namespace: flux-system
+spec:
+  interval: 1m
+  path: ./apps/core/cert-manager
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: repo
+  timeout: 1m
+  wait: true
+  dependsOn:
+    - name: services-core-op-connect
+---
+# finally, step ca is used as the authority to issue certificates when requested cert manager
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: services-core-step-ca
+  namespace: flux-system
+spec:
+  interval: 1m
+  path: ./apps/core/step-ca
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: repo
+  timeout: 1m
+  wait: true
+  dependsOn:
+    - name: services-core-cert-manager

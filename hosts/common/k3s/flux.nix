@@ -50,7 +50,7 @@ in
           apiVersion: source.toolkit.fluxcd.io/v1
           kind: GitRepository
           metadata:
-            name: flux-system
+            name: repo
             namespace: flux-system
           spec:
             interval: 1m
@@ -59,20 +59,20 @@ in
               branch: main
           EOF
 
-          # bootstrap flux
+          # bootstrap the root 
           kubectl apply -f - <<EOF
           apiVersion: kustomize.toolkit.fluxcd.io/v1
           kind: Kustomization
           metadata:
-            name: apps
+            name: services
             namespace: flux-system
           spec:
             interval: 1m
-            path: ./apps
+            path: ${cfg.path}
             prune: true
             sourceRef:
               kind: GitRepository
-              name: flux-system
+              name: repo
             timeout: 2m
             wait: true
           EOF

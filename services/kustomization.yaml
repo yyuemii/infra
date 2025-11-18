@@ -1,0 +1,33 @@
+# reconcile core services first to prevent issues with apps reconciling before core services are ready
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: services-core
+  namespace: flux-system
+spec:
+  interval: 1m
+  path: ./services/core
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: repo
+  timeout: 1m
+  wait: true
+---
+# reconcile apps in any order, as any dependencies should be grouped in the same namespace, or setup in core already
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: services-apps
+  namespace: flux-system
+spec:
+  interval: 1m
+  path: ./services/apps
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: repo
+  timeout: 1m
+  wait: true
+  dependsOn:
+    - name: services-core
