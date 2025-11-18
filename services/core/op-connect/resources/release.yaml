@@ -7,6 +7,12 @@ spec:
   releaseName: connect
   interval: 1h
   timeout: 5m
+  install:
+    crds: Create
+    remediation:
+      retries: 5
+  upgrade:
+    crds: Create
   chart:
     spec:
       chart: connect
