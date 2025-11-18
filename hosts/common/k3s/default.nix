@@ -23,6 +23,8 @@
       path = lib.mkOption {
         type = lib.types.str;
         description = "Path to where manifests are located";
+
+        default = "";
       };
     };
   };

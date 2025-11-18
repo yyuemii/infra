@@ -6,6 +6,10 @@
 }:
 let
   cfg = config.services.lumi.k3s.fluxcd;
+
+  manifest = "${lib.replaceStrings [ "https://" ] [ "" ] cfg.repository}${
+    if cfg.path == "" then "" else "/"
+  }${cfg.path}/flux.yaml";
 in
 {
   config = lib.mkIf cfg.enable {
@@ -59,23 +63,8 @@ in
               branch: main
           EOF
 
-          # bootstrap the root 
-          kubectl apply -f - <<EOF
-          apiVersion: kustomize.toolkit.fluxcd.io/v1
-          kind: Kustomization
-          metadata:
-            name: services
-            namespace: flux-system
-          spec:
-            interval: 1m
-            path: ${cfg.path}
-            prune: true
-            sourceRef:
-              kind: GitRepository
-              name: repo
-            timeout: 2m
-            wait: true
-          EOF
+          # bootstrap flux manifest at the root of the repostiory
+          kubectl apply -f ${manifest}
         '';
       };
     };

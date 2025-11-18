@@ -10,8 +10,8 @@
     fluxcd = {
       enable = true;
 
-      repository = "https://github.com/yyuemii/infra.git";
-      path = "./services";
+      repository = "https://github.com/yyuemii/infra";
+      path = "services";
     };
   };
 }
