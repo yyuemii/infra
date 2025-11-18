@@ -8,7 +8,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./apps/core/op-connect
+  path: ./services/core/op-connect
   prune: true
   sourceRef:
     kind: GitRepository
@@ -24,7 +24,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./apps/core/cert-manager
+  path: ./services/core/cert-manager
   prune: true
   sourceRef:
     kind: GitRepository
@@ -42,7 +42,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./apps/core/step-ca
+  path: ./services/core/step-ca
   prune: true
   sourceRef:
     kind: GitRepository
