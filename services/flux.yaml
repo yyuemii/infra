@@ -7,7 +7,7 @@ metadata:
 spec:
   interval: 1m
   path: ./services/core/flux.yaml
-  prune: true
+  prune: false
   sourceRef:
     kind: GitRepository
     name: repo
