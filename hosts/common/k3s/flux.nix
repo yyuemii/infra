@@ -13,6 +13,7 @@ in
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       fluxcd
+      gitMinimal
     ];
 
     systemd.services.flux-bootstrap = {
@@ -27,6 +28,7 @@ in
       };
 
       path = with pkgs; [
+        gitMinimal
         kubectl
         kubernetes-helm
         fluxcd
