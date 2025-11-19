@@ -7,9 +7,9 @@
 let
   cfg = config.services.lumi.k3s.fluxcd;
 
-  manifest = "${lib.replaceStrings [ "https://" ] [ "" ] cfg.repository}${
-    if cfg.path == "" then "" else "/"
-  }${cfg.path}/flux.yaml";
+  manifest = "${
+    lib.replaceStrings [ "github.com" ] [ "raw.github.com" ] cfg.repository
+  }/main/${cfg.path}${if cfg.path == "" then "" else "/"}flux.yaml";
 in
 {
   config = lib.mkIf cfg.enable {
