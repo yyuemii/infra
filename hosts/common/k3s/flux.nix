@@ -7,9 +7,7 @@
 let
   cfg = config.services.lumi.k3s.fluxcd;
 
-  manifest = "${
-    lib.replaceStrings [ "github.com" ] [ "raw.github.com" ] cfg.repository
-  }/main/${cfg.path}${if cfg.path == "" then "" else "/"}flux.yaml";
+  manifest = "${lib.replaceStrings [ "https://" ] [ "" ] cfg.repository}/${cfg.path}";
 in
 {
   config = lib.mkIf cfg.enable {
@@ -64,7 +62,7 @@ in
           EOF
 
           # bootstrap flux manifest at the root of the repostiory
-          kubectl apply -f ${manifest}
+          kubectl apply -k ${manifest}
         '';
       };
     };
