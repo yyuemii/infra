@@ -4,3 +4,5 @@ namespace: pocket
 resources:
   - ./helm/repository.yaml
   - ./resources/namespace.yaml
+  - ./resources/release.yaml
+  - ./resources/ingress.yaml
