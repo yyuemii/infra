@@ -60,7 +60,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./services/core/cert-manager
+  path: ./services/core/cf-issuer
   prune: true
   sourceRef:
     kind: GitRepository
@@ -68,4 +68,4 @@ spec:
   timeout: 1m
   wait: true
   dependsOn:
-    - name: services-core-op-connect
+    - name: services-core-step-ca
