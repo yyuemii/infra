@@ -14,5 +14,3 @@ spec:
     name: repo
   timeout: 1m
   wait: true
-  dependsOn:
-    - name: services-core-cf-issuer
