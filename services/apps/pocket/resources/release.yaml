@@ -29,8 +29,8 @@ spec:
             appName: id.yyuemii.co
             allowOwnAccountEdit: false
 
-      persistence:
-        data:
-          enabled: true
-          size: 10Gi
-          accessMode: ReadWriteOnce
+    persistence:
+      data:
+        enabled: true
+        size: 10Gi
+        accessMode: ReadWriteOnce
