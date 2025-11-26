@@ -42,7 +42,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./services/core/step-cas
+  path: ./services/core/step-ca
   prune: true
   sourceRef:
     kind: GitRepository
