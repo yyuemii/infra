@@ -2,6 +2,7 @@
 {
   imports = [
     ../common/k3s
+    ../common/tailscale
   ];
 
   services.lumi.k3s = {
@@ -13,5 +14,9 @@
       repository = "https://github.com/yyuemii/infra";
       path = "services";
     };
+  };
+
+  services.lumi.tailscale = {
+    enable = true;
   };
 }
