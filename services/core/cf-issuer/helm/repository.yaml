@@ -5,6 +5,6 @@ metadata:
   namespace: cf-issuer
 spec:
   type: oci
-  url: oci://ghcr.io/cloudflare/origin-ca-issuer-charts/origin-ca-issuer
+  url: oci://ghcr.io/cloudflare/origin-ca-issuer-charts
   interval: 1h
   timeout: 5m

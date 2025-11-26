@@ -9,12 +9,10 @@ spec:
   timeout: 5m
   chart:
     spec:
-      chart: ""
+      chart: origin-ca-issuer
       sourceRef:
         kind: HelmRepository
         name: cf-issuer
         namespace: cf-issuer
       interval: 1h
-  values:
-    rbac:
-      create: true
+  values: {}
