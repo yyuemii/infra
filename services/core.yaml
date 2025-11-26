@@ -34,7 +34,7 @@ spec:
   dependsOn:
     - name: services-core-op-connect
 ---
-# finally, step ca is used as the authority to issue certificates when requested cert manager
+# step ca is used as the authority to issue internal facing certificates (lu.mi)
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
@@ -42,7 +42,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./services/core/step-ca
+  path: ./services/core/step-cas
   prune: true
   sourceRef:
     kind: GitRepository
@@ -51,3 +51,21 @@ spec:
   wait: true
   dependsOn:
     - name: services-core-cert-manager
+---
+# cf issuer will route requests from cert manager to cloudflare to issue external facing certificates (yyuemii.co)
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: services-core-cf-issuer
+  namespace: flux-system
+spec:
+  interval: 1m
+  path: ./services/core/cert-manager
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: repo
+  timeout: 1m
+  wait: true
+  dependsOn:
+    - name: services-core-op-connect

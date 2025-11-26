@@ -1,0 +1,11 @@
+apiVersion: cert-manager.k8s.cloudflare.com/v1
+kind: ClusterOriginIssuer
+metadata:
+  name: cf-issuer
+  namespace: cf-issuer
+spec:
+  requestType: OriginECC
+  auth:
+    tokenRef:
+      name: cf-issuer
+      key: token

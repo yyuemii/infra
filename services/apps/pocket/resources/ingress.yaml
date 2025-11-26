@@ -4,7 +4,7 @@ metadata:
   name: pocket
   namespace: pocket
   annotations:
-    cert-manager.io/cluster-issuer: stepca-issuer
+    cert-manager.io/cluster-issuer: cf-issuer
 spec:
   rules:
     - host: id.yyuemii.co
@@ -17,7 +17,7 @@ spec:
                 name: pocket
                 port:
                   number: 80
-  # tls:
-  #   - hosts:
-  #       - id.on.lu.mi
-  #     secretName: cert-home-ingress
+  tls:
+    - hosts:
+        - id.yyuemii.co
+      secretName: cert-pocket-ingress

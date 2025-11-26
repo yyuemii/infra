@@ -1,0 +1,22 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cf-issuer
+  namespace: cf-issuer
+spec:
+  releaseName: cf-issuer
+  interval: 1h
+  timeout: 5m
+  chart:
+    spec:
+      chart: origin-ca-issuer
+      sourceRef:
+        kind: HelmRepository
+        name: cf-issuer
+        namespace: cf-issuer
+      interval: 1h
+  dependsOn:
+    - name: cf-issuer-crds
+  values:
+    rbac:
+      create: true

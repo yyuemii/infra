@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: cf-issuer
+  namespace: cf-issuer
+spec:
+  url: https://cloudflare.github.io/origin-ca-issuer/charts
+  interval: 1h
+  timeout: 5m
