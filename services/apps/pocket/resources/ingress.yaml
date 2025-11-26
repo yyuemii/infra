@@ -4,7 +4,9 @@ metadata:
   name: pocket
   namespace: pocket
   annotations:
-    cert-manager.io/cluster-issuer: cf-issuer
+    cert-manager.io/issuer: cf-issuer
+    cert-manager.io/issuer-kind: ClusterOriginIssuer
+    cert-manager.io/issuer-group: cert-manager.k8s.cloudflare.com
 spec:
   rules:
     - host: id.yyuemii.co
