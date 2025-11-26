@@ -23,6 +23,7 @@ spec:
 
     config:
       ui:
+        useDefaults: false
         settings:
           app:
             appName: id.yyuemii.co
