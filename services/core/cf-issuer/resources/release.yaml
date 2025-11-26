@@ -15,8 +15,6 @@ spec:
         name: cf-issuer
         namespace: cf-issuer
       interval: 1h
-  dependsOn:
-    - name: cf-issuer-crds
   values:
     rbac:
       create: true
