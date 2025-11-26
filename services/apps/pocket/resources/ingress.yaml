@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pocket
+  namespace: pocket
+  annotations:
+    cert-manager.io/cluster-issuer: stepca-issuer
+spec:
+  rules:
+    - host: id.yyuemii.co
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pocket
+                port:
+                  number: 80
+  # tls:
+  #   - hosts:
+  #       - id.on.lu.mi
+  #     secretName: cert-home-ingress

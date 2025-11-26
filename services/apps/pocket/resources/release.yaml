@@ -1,0 +1,29 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: pocket
+  namespace: pocket
+spec:
+  releaseName: pocket
+  interval: 1h
+  timeout: 5m
+  chart:
+    spec:
+      chart: pocket-id
+      version: "1.x"
+      sourceRef:
+        kind: HelmRepository
+        name: anza-labs
+        namespace: pocket
+      interval: 1h
+  values:
+    host: id.yyuemii.co
+    timeZone: America/New_York
+    fullnameOverride: pocket
+
+    config:
+      ui:
+        settings:
+          app:
+            appName: id.yyuemii.co
+            allowOwnAccountEdit: false
