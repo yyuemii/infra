@@ -9,7 +9,6 @@ spec:
   timeout: 5m
   chart:
     spec:
-      chart: origin-ca-issuer
       sourceRef:
         kind: HelmRepository
         name: cf-issuer
