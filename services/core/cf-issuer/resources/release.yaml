@@ -9,6 +9,7 @@ spec:
   timeout: 5m
   chart:
     spec:
+      chart: ""
       sourceRef:
         kind: HelmRepository
         name: cf-issuer
