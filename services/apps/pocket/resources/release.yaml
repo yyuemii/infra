@@ -28,6 +28,7 @@ spec:
           app:
             appName: id.yyuemii.co
             allowOwnAccountEdit: false
+            emailsVerified: true
 
     persistence:
       data:
