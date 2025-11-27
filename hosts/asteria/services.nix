@@ -14,6 +14,15 @@
       repository = "https://github.com/yyuemii/infra";
       path = "services";
     };
+
+    oidc = {
+      enable = true;
+
+      issuer = "https://id.yyuemii.co";
+      roles = {
+        developer = "cluster-admin";
+      };
+    };
   };
 
   services.lumi.tailscale = {
