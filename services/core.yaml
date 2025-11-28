@@ -18,6 +18,24 @@ spec:
   dependsOn:
     - name: services-crds
 ---
+# external secrets is used to generate secrets for external services (gh, ghcr, etc)
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: services-core-external-secrets
+  namespace: flux-system
+spec:
+  interval: 1m
+  path: ./services/core/external-secrets
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: repo
+  timeout: 1m
+  wait: true
+  dependsOn:
+    - name: services-crds
+---
 # cert manager is used to manage and request ingress certificates
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
