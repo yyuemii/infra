@@ -7,5 +7,3 @@ spec:
   interval: 1h
   timeout: 5m
   url: https://charts.external-secrets.io
-  ref:
-    tag: v1.1.0
