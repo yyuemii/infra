@@ -18,8 +18,10 @@ datasources:
         url: http://loki-gateway.monitoring.svc.cluster.local
         jsonData:
           httpHeaderName1: "Authorization"
+          httpHeaderName2: "X-Scope-OrgID"
         secureJsonData:
           httpHeaderValue1: "Bearer $__file{/var/run/secrets/kubernetes.io/serviceaccount/token}" # connect to loki over grafana svc account
+          httpHeaderValue2: "default"
 
 # mount svc account so we can access loki securely
 serviceAccount:
