@@ -9,9 +9,9 @@ resources:
   - ./resources/loki-release.yaml
   - ./resources/loki-role.yaml
 configMapGenerator:
-  - name: grafana
+  - name: grafana-config
     files:
       - values.yaml=./config/grafana-values.yaml
-  - name: loki
+  - name: loki-config
     files:
       - values.yaml=./config/loki-values.yaml

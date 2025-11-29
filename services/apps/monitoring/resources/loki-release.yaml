@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: loki
-      version: "10.x"
+      version: "3.x"
       sourceRef:
         kind: HelmRepository
         name: grafana
@@ -18,5 +18,5 @@ spec:
       interval: 1h
   valuesFrom:
     - kind: ConfigMap
-      name: loki
+      name: loki-config
       valuesKey: values.yaml

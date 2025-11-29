@@ -18,5 +18,5 @@ spec:
       interval: 1h
   valuesFrom:
     - kind: ConfigMap
-      name: grafana
+      name: grafana-config
       valuesKey: values.yaml
