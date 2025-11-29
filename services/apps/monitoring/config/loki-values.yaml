@@ -34,8 +34,8 @@ gateway:
 
 # setup 1 replica for all core components
 backend:
-  replicas: 2
+  replicas: 1
 read:
-  replicas: 2
+  replicas: 1
 write:
-  replicas: 2
+  replicas: 1
