@@ -18,6 +18,8 @@ metadata:
   name: services-external-tamagotchi
   namespace: flux-system
 spec:
+  interval: 30m
+  timeout: 2m
   prune: true
   wait: true
   sourceRef:
