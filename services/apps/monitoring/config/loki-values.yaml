@@ -12,14 +12,13 @@ loki:
         index:
           prefix: loki_index_
           period: 24h
-  ingester:
-    chunk_encoding: snappy
-  tracing:
-    enabled: true
-  querier:
-    max_concurrent: 2
-  pattern_ingester:
-    enabled: true
+  structuredConfig:
+    auth_enabled: true
+    ingester:
+      chunk_encoding: snappy
+    limits_config:
+      allow_structured_metadata: false
+      volume_enabled: true
 
 chunksCache:
   writebackSizeLimit: 10MB
@@ -33,7 +32,7 @@ gateway:
   service:
     type: LoadBalancer
 
-# setup 2 replicas for all core components
+# setup 1 replica for all core components
 backend:
   replicas: 2
 read:
