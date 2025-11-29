@@ -26,7 +26,6 @@ spec:
         news_feed_enabled: false
 
     persistence:
-      data:
-        enabled: true
-        size: 10Gi
-        accessMode: ReadWriteOnce
+      enabled: true
+      size: 10Gi
+      accessMode: ReadWriteOnce
