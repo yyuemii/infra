@@ -25,6 +25,9 @@ datasources:
 serviceAccount:
   automountServiceAccountToken: true
 
+initChownData:
+  enabled: false
+
 persistence:
   enabled: true
   size: 10Gi
