@@ -1,4 +1,4 @@
-deploymentMode: SingleBinary
+deploymentMode: SimpleScalable
 
 loki:
   commonConfig:
@@ -27,53 +27,23 @@ loki:
   #   query_timeout: 300s
   #   volume_enabled: true
 
-gateway:
-  enabled: true
-
-singleBinary:
-  replicas: 1
-  resources:
-    limits:
-      cpu: 3
-      memory: 4Gi
-    requests:
-      cpu: 2
-      memory: 2Gi
-  extraEnv:
-    # Keep a little bit lower than mmory limits
-    - name: GOMEMLIMIT
-      value: 3750MiB
-
 chunksCache:
   writebackSizeLimit: 10MB
 
 minio:
   enabled: true
 
-# all below replicas can be set to 0 since we're running in single binary mode
+# setup gateway so we can securely connect via grafanas svc account
+gateway:
+  enabled: true
 
-backend:
-  replicas: 0
-read:
-  replicas: 0
-write:
-  replicas: 0
-
-ingester:
-  replicas: 0
-querier:
-  replicas: 0
-queryFrontend:
-  replicas: 0
-queryScheduler:
-  replicas: 0
-distributor:
-  replicas: 0
-compactor:
-  replicas: 0
-indexGateway:
-  replicas: 0
-bloomCompactor:
-  replicas: 0
-bloomGateway:
-  replicas: 0
+# setup 1 replica for all core components
+simpleScalable:
+  querier:
+    replicas: 1
+  ingester:
+    replicas: 1
+  distributor:
+    replicas: 1
+  queryFrontend:
+    replicas: 1
