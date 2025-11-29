@@ -4,3 +4,4 @@ resources:
   - crds.yaml
   - core.yaml
   - apps.yaml
+  - external.yaml

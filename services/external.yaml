@@ -1,0 +1,18 @@
+## reconcile external apps in any order, as any dependencies should be already prepared by core or within themselves
+
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: services-apps
+  namespace: flux-system
+spec:
+  interval: 1m
+  path: ./services/external
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: repo
+  timeout: 1m
+  wait: true
+  dependsOn:
+    - name: services-core-cf-issuer

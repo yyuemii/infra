@@ -1,0 +1,4 @@
+kind: Kustomization
+resources:
+  - secrets/github.yaml
+  - repositories/tamagotchi.yaml
