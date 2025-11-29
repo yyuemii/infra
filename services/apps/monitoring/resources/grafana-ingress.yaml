@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana
+  namespace: monitoring
+  annotations:
+    cert-manager.io/cluster-issuer: stepca-issuer
+spec:
+  rules:
+    - host: grafana.on.lu.mi
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: grafana
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - grafana.on.lu.mi
+      secretName: cert-grafana-ingress

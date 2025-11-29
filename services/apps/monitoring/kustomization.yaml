@@ -3,5 +3,6 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./helm/repository.yaml
-  - ./resources/grafana-release.yaml
   - ./resources/namespace.yaml
+  - ./resources/grafana-release.yaml
+  - ./resources/grafana-ingress.yaml
