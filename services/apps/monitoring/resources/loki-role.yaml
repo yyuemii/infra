@@ -16,6 +16,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: grafana
+    namespace: monitoring
 roleRef:
   kind: Role
   name: loki-read

@@ -19,7 +19,7 @@ datasources:
         jsonData:
           httpHeaderName1: "Authorization"
         secureJsonData:
-          httpHeaderValue1: "Bearer ${file:/var/run/secrets/kubernetes.io/serviceaccount/token}" # connect to loki over grafana svc account
+          httpHeaderValue1: "Bearer $__file{/var/run/secrets/kubernetes.io/serviceaccount/token}" # connect to loki over grafana svc account
 
 # mount svc account so we can access loki securely
 serviceAccount:
