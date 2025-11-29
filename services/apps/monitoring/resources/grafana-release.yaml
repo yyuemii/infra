@@ -18,6 +18,8 @@ spec:
       interval: 1h
   values:
     grafana.ini:
+      server:
+        root_url: https://grafana.on.lu.mi
       analytics:
         check_for_updates: false
         check_for_plugin_updates: false
