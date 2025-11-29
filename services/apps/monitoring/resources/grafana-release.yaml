@@ -1,0 +1,32 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  releaseName: grafana
+  interval: 1h
+  timeout: 5m
+  chart:
+    spec:
+      chart: grafana
+      version: "10.x"
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: monitoring
+      interval: 1h
+  values:
+    grafana.ini:
+      analytics:
+        check_for_updates: false
+        check_for_plugin_updates: false
+        reporting_enabled: false
+      news:
+        news_feed_enabled: false
+
+    persistence:
+      data:
+        enabled: true
+        size: 10Gi
+        accessMode: ReadWriteOnce
