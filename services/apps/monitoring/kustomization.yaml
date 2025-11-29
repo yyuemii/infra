@@ -6,3 +6,12 @@ resources:
   - ./resources/namespace.yaml
   - ./resources/grafana-release.yaml
   - ./resources/grafana-ingress.yaml
+  - ./resources/loki-release.yaml
+  - ./resources/loki-role.yaml
+configMapGenerator:
+  - name: grafana
+    files:
+      - values.yaml=./config/grafana-values.yaml
+  - name: loki
+    files:
+      - values.yaml=./config/loki-values.yaml

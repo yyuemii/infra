@@ -1,0 +1,31 @@
+grafana.ini:
+  server:
+    root_url: https://grafana.on.lu.mi
+  analytics:
+    check_for_updates: false
+    check_for_plugin_updates: false
+    reporting_enabled: false
+  news:
+    news_feed_enabled: false
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Loki
+        type: loki
+        access: proxy
+        url: http://loki-gateway.monitoring.svc.cluster.local
+        jsonData:
+          httpHeaderName1: "Authorization"
+        secureJsonData:
+          httpHeaderValue1: "Bearer ${file:/var/run/secrets/kubernetes.io/serviceaccount/token}" # connect to loki over grafana svc account
+
+# mount svc account so we can access loki securely
+serviceAccount:
+  automountServiceAccountToken: true
+
+persistence:
+  enabled: true
+  size: 10Gi
+  accessMode: ReadWriteOnce

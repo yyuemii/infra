@@ -1,0 +1,79 @@
+deploymentMode: SingleBinary
+
+loki:
+  commonConfig:
+    replication_factor: 1
+  schemaConfig:
+    configs:
+      - from: 2024-04-01
+        store: tsdb
+        object_store: s3
+        schema: v13
+        index:
+          prefix: loki_index_
+          period: 24h
+  ingester:
+    chunk_encoding: snappy
+  tracing:
+    enabled: true
+  querier:
+    max_concurrent: 2
+  auth_enabled: true
+  # limits_config:
+  #   reject_old_samples: true
+  #   reject_old_samples_max_age: 168h
+  #   max_cache_freshness_per_query: 10m
+  #   split_queries_by_interval: 15m
+  #   query_timeout: 300s
+  #   volume_enabled: true
+
+gateway:
+  enabled: true
+
+singleBinary:
+  replicas: 1
+  resources:
+    limits:
+      cpu: 3
+      memory: 4Gi
+    requests:
+      cpu: 2
+      memory: 2Gi
+  extraEnv:
+    # Keep a little bit lower than mmory limits
+    - name: GOMEMLIMIT
+      value: 3750MiB
+
+chunksCache:
+  writebackSizeLimit: 10MB
+
+minio:
+  enabled: true
+
+# all below replicas can be set to 0 since we're running in single binary mode
+
+backend:
+  replicas: 0
+read:
+  replicas: 0
+write:
+  replicas: 0
+
+ingester:
+  replicas: 0
+querier:
+  replicas: 0
+queryFrontend:
+  replicas: 0
+queryScheduler:
+  replicas: 0
+distributor:
+  replicas: 0
+compactor:
+  replicas: 0
+indexGateway:
+  replicas: 0
+bloomCompactor:
+  replicas: 0
+bloomGateway:
+  replicas: 0
