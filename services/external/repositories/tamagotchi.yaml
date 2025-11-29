@@ -18,6 +18,8 @@ metadata:
   name: services-external-tamagotchi
   namespace: flux-system
 spec:
+  prune: true
+  wait: true
   sourceRef:
     kind: GitRepository
     name: tamagotchi
