@@ -1,0 +1,18 @@
+alloy:
+  configMap:
+    create: false
+    name: alloy-config
+    key: .
+
+controller:
+  type: "deployment"
+
+serviceMonitor:
+  enabled: true
+
+rbac:
+  create: true
+
+serviceAccount:
+  create: true
+  name: alloy

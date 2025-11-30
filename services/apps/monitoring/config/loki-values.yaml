@@ -1,4 +1,4 @@
-deploymentMode: SimpleScalable
+deploymentMode: SingleBinary
 
 loki:
   commonConfig:
@@ -22,7 +22,7 @@ loki:
       s3ForcePathStyle: true
       insecure: true
   structuredConfig:
-    auth_enabled: true
+    auth_enabled: false
     ingester:
       chunk_encoding: snappy
     limits_config:
@@ -38,20 +38,19 @@ minio:
   persistence:
     size: 25Gi
 
-# setup gateway so we can securely connect via grafanas svc account
-gateway:
-  enabled: true
-
-# create 1 replica for all core components
-backend:
-  replicas: 1
-read:
-  replicas: 1
-write:
+# create 1 replica for single binary mode
+singleBinary:
   replicas: 1
 
 # disable all other components from other deploymennt modes
-singleBinary:
+gateway:
+  enabled: false
+
+backend:
+  replicas: 0
+read:
+  replicas: 0
+write:
   replicas: 0
 
 ingester:

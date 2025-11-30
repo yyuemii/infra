@@ -1,0 +1,28 @@
+fullnameOverride: prometheus
+
+prometheus:
+  prometheusSpec:
+    replicas: 1
+    enableAdminAPI: false
+
+# disable a few things included in the prometheus stack
+grafana:
+  enabled: false
+alertmanager:
+  enabled: false
+
+# disable extra components
+nodeExporter:
+  enabled: false
+kubeStateMetrics:
+  enabled: false
+kubeApiServer:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
+coreDns:
+  enabled: false
+kubeProxy:
+  enabled: false

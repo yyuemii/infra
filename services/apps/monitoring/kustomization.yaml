@@ -4,16 +4,29 @@ namespace: monitoring
 configurations:
   - kustomizeconfig.yaml
 resources:
-  - ./helm/repository.yaml
+  - ./helm/grafana-repository.yaml
+  - ./helm/prometheus-repository.yaml
   - ./resources/namespace.yaml
   - ./resources/grafana-release.yaml
   - ./resources/grafana-ingress.yaml
   - ./resources/loki-release.yaml
-  - ./resources/loki-role.yaml
+  - ./resources/prometheus-release.yaml
+  - ./resources/alloy-release.yaml
 configMapGenerator:
-  - name: grafana-config
+  - name: grafana-values
     files:
       - values.yaml=./config/grafana-values.yaml
-  - name: loki-config
+  - name: prometheus-values
+    files:
+      - values.yaml=./config/prometheus-values.yaml
+  - name: loki-values
     files:
       - values.yaml=./config/loki-values.yaml
+  - name: alloy-values
+    files:
+      - values.yaml=./config/alloy-values.yaml
+  - name: alloy-config
+    files:
+      - ./config/alloy/logging.alloy
+    options:
+      disableNameSuffixHash: true
