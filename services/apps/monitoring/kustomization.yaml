@@ -27,6 +27,7 @@ configMapGenerator:
       - values.yaml=./config/alloy-values.yaml
   - name: alloy-config
     files:
-      - ./config/alloy/logging.alloy
+      - ./config/alloy/config.alloy
+      - ./config/alloy/kubernetes.alloy
     options:
       disableNameSuffixHash: true
