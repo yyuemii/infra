@@ -18,13 +18,6 @@ spec:
         format: json
     metrics:
       prometheus:
-        service:
-          enabled: true
-        serviceMonitor:
-          enabled: true
-          namespace: monitoring
-          additionalLabels:
-            release: prometheus
         addEntryPointsLabels: true
         addRoutersLabels: true
         addServicesLabels: true
