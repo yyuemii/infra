@@ -7,9 +7,11 @@ spec:
   valuesContent: |-
     ports:
       web:
-        redirectTo: 
-          priority: 10
-          port: websecure
+        redirections:
+          entryPoint:
+            to: websecure
+            scheme: https
+            permanent: true
     logs:
       general:
         format: json
@@ -18,6 +20,13 @@ spec:
         format: json
     metrics:
       prometheus:
+        service:
+          enabled: false
+        serviceMonitor:
+          enabled: false
+          namespace: monitoring
+          additionalLabels:
+            release: prometheus
         addEntryPointsLabels: true
         addRoutersLabels: true
         addServicesLabels: true
