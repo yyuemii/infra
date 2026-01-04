@@ -3,11 +3,12 @@ kind: HelmChartConfig
 metadata:
   name: traefik
   namespace: kube-system
-
 spec:
   valuesContent: |-
-    web:
-      redirectTo: websecure
+    ports:
+      web:
+        redirectTo: 
+          port: websecure
     logs:
       general:
         format: json
@@ -21,6 +22,8 @@ spec:
         serviceMonitor:
           enabled: true
           namespace: monitoring
+          labels:
+            release: prometheus
         addEntryPointsLabels: true
         addRoutersLabels: true
         addServicesLabels: true
