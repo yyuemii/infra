@@ -9,6 +9,7 @@ spec:
       web:
         redirectTo: 
           port: websecure
+          priority: 10
     logs:
       general:
         format: json
@@ -22,7 +23,7 @@ spec:
         serviceMonitor:
           enabled: true
           namespace: monitoring
-          labels:
+          additionalLabels:
             release: prometheus
         addEntryPointsLabels: true
         addRoutersLabels: true
