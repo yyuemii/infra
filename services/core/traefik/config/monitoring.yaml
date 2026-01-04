@@ -6,26 +6,21 @@ metadata:
 
 spec:
   valuesContent: |-
-    deployment:
-      podAnnotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "9100"
+    web:
+      redirectTo: websecure
     logs:
       general:
         format: json
       access:
         enabled: true
         format: json
-    ports:
-      metrics:
-        port: 9100
-        expose:
-          default: true
-        exposedPort: 9100
     metrics:
       prometheus:
-        enabled: true
-        entryPoint: metrics
+        service:
+          enabled: true
+        serviceMonitor:
+          enabled: true
+          namespace: kube-system
         addEntryPointsLabels: true
         addRoutersLabels: true
         addServicesLabels: true
