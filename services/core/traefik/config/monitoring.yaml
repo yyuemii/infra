@@ -20,7 +20,7 @@ spec:
           enabled: true
         serviceMonitor:
           enabled: true
-          namespace: kube-system
+          namespace: monitoring
         addEntryPointsLabels: true
         addRoutersLabels: true
         addServicesLabels: true
