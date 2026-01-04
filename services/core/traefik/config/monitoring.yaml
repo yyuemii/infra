@@ -8,8 +8,8 @@ spec:
     ports:
       web:
         redirectTo: 
-          port: websecure
           priority: 10
+          port: websecure
     logs:
       general:
         format: json
