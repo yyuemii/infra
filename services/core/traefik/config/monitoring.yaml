@@ -21,9 +21,9 @@ spec:
     metrics:
       prometheus:
         service:
-          enabled: false
+          enabled: true
         serviceMonitor:
-          enabled: false
+          enabled: true
           namespace: monitoring
           additionalLabels:
             release: prometheus
