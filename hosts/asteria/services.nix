@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ../common/k3s
@@ -33,5 +38,16 @@
       "${lib.elemAt config.networking.nameservers 0}/32"
       "${(lib.elemAt config.networking.interfaces.enp0s31f6.ipv4.addresses 0).address}/32"
     ];
+  };
+
+  systemd.services.disable-eee = {
+    description = "Disable energy efficient ethernet to fix link up issues after network loss";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.ethtool}/bin/ethtool --set-eee enp0s31f6 eee off";
+    };
   };
 }
