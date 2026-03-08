@@ -22,6 +22,12 @@ spec:
             - name: http
               containerPort: 1411
               protocol: TCP
+          env:
+            - name: ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: encryption
+                  key: key
           envFrom:
             - configMapRef:
                 name: pocket

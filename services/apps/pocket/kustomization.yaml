@@ -8,3 +8,4 @@ resources:
   - ./resources/ingress.yaml
   - ./resources/service.yaml
   - ./resources/stateful-set.yaml
+  - ./secrets/encryption.yaml
