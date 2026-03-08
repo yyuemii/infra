@@ -3,8 +3,8 @@ kind: Kustomization
 namespace: pocket
 resources:
   - ./config/env.yaml
-  # - ./resources/namespace.yaml
-  # - ./resources/release.yaml
-  # - ./resources/ingress.yaml
-  # - ./resources/service.yaml
-  # - ./resources/stateful-set.yaml
+  - ./resources/namespace.yaml
+  - ./resources/release.yaml
+  - ./resources/ingress.yaml
+  - ./resources/service.yaml
+  - ./resources/stateful-set.yaml
