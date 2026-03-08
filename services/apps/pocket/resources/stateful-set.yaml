@@ -24,7 +24,7 @@ spec:
               protocol: TCP
           envFrom:
             - configMapRef:
-                name: pocket-config
+                name: pocket
           volumeMounts:
             - name: pocket-data
               mountPath: /app/data
