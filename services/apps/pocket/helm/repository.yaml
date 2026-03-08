@@ -1,9 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: anza-labs
-  namespace: pocket
-spec:
-  url: https://anza-labs.github.io/charts
-  interval: 1h
-  timeout: 5m
