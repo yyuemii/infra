@@ -51,6 +51,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  systemd.network.netdevs.wlp0s20f3.enable = false; # wifi
   networking.interfaces.enp0s31f6 = {
     useDHCP = false;
     ipv4.addresses = [
@@ -60,13 +61,13 @@
       }
     ];
   };
-  systemd.network.netdevs.wlp0s20f3.enable = false; # wifi
 
   networking.defaultGateway = {
     address = "10.0.10.1";
     interface = "enp0s31f6";
   };
   networking.nameservers = [ "10.0.10.1" ];
+  networking.enableIPv6 = false;
 
   hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
 
