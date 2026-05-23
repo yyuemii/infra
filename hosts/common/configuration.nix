@@ -9,6 +9,7 @@ in
 
   networking.useDHCP = lib.mkDefault false;
   networking.useNetworkd = true; # handles fqdn properly
+  services.resolved.enable = true; # prevent tailscaled from breaking dns resolution after network loss
 
   nixpkgs.config.allowUnfree = true; # nvidia drivers :(
 
