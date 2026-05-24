@@ -1,7 +1,7 @@
 ## cloudflare issuer chart does not have include crds, so we need to manually setup a git repo and install them
 ## more info: https://github.com/cloudflare/origin-ca-issuer/issues/78
 
-apiVersion: source.toolkit.fluxcd.io/v1
+apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
   name: crds-cf-issuer-repo
@@ -12,7 +12,7 @@ spec:
   ref:
     tag: v0.13.0
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: crds-cf-issuer

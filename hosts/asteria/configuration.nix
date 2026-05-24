@@ -12,16 +12,8 @@
 
     interfaces = {
       enp0s31f6 = {
-        allowedTCPPorts = [
-          22
-          80
-          443
-          25565
-        ];
-        allowedUDPPorts = [
-          443
-          25565
-        ];
+        allowedTCPPorts = [ 22 80 443 ];
+        allowedUDPPorts = [ 443 ];
       };
     };
   };

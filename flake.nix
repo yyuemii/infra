@@ -12,8 +12,6 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     opnix.url = "github:brizzbuzz/opnix";
-
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 
   outputs =
