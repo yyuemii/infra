@@ -4,6 +4,11 @@
   ...
 }:
 {
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   networking.hostName = "asteria"; # asteria.lu.mi
   networking.wireless.enable = false;
 
@@ -12,7 +17,11 @@
 
     interfaces = {
       enp0s31f6 = {
-        allowedTCPPorts = [ 22 80 443 ];
+        allowedTCPPorts = [
+          22
+          80
+          443
+        ];
         allowedUDPPorts = [ 443 ];
       };
     };
