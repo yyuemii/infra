@@ -51,5 +51,11 @@ in
       extraUpFlags = flags;
       extraSetFlags = flags;
     };
+
+    # fix issue with network not properly recovering, see https://github.com/nixos/nixpkgs/issues/527403
+    systemd.services.tailscaled = {
+      wants = [ "network-online.target" ];
+      after = [ "network-online.target" ];
+    };
   };
 }
