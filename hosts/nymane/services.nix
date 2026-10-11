@@ -11,7 +11,7 @@
       enable = true;
 
       repository = "https://github.com/yyuemii/infra.git";
-      path = "cluster";
+      path = "cluster?ref=navi"; # TODO: remove when navi rewrite is merged into main
     };
   };
 }

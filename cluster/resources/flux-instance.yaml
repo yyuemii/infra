@@ -28,5 +28,5 @@ spec:
   sync:
     kind: GitRepository
     url: "https://github.com/yyuemii/infra.git"
-    ref: "refs/heads/main"
+    ref: "refs/heads/navi" # TODO: remove when navi rewrite is merged into main
     path: "cluster"
