@@ -5,30 +5,61 @@
 let
   inherit (inputs.nixpkgs) lib;
 
-  hosts = {
-    asteria = import ./asteria { inherit inputs lib; };
-  };
-
-  # standard pre-requisites for any infra host
-  defaultModules = [
-    inputs.disko.nixosModules.disko
-    inputs.opnix.nixosModules.default
-    (import ./common)
+  hosts = [
+    ./nymane
   ];
 
+  defaultImports = [
+    inputs.disko.nixosModules.disko
+    inputs.disko-zfs.nixosModules.default
+    inputs.opnix.nixosModules.default
+
+    ./configuration.nix
+    ./services.nix
+    ./users.nix
+  ];
 in
 {
-  nixosConfigurations = (
-    builtins.mapAttrs (
-      name: host:
-      lib.nixosSystem {
-        inherit (host) system;
+  meta = {
+    nixpkgs = import inputs.nixpkgs {
+      system = "x86_64-linux";
+    };
 
-        modules = defaultModules ++ host.modules;
-        specialArgs = {
-          inherit inputs;
-        };
-      }
-    ) hosts
-  );
+    facts = {
+      dirName = ".navi/facts";
+    };
+
+    provisioners.bare-metal = {
+      type = "bare-metal";
+
+      nixosAnywhere = {
+        enable = true;
+        extraArgs = [
+          "--build-on-remote"
+        ];
+      };
+    };
+  };
+
+  defaults = {
+    _module.args.inputs = inputs;
+
+    deployment = {
+      provisioner = "bare-metal";
+
+      targetUser = "brianna";
+      buildOnTarget = true;
+    };
+  };
 }
+// lib.listToAttrs (
+  map (
+    file:
+    let
+      host = import file { inherit inputs lib; };
+    in
+    lib.nameValuePair host.name {
+      imports = defaultImports ++ host.imports;
+    }
+  ) hosts
+)

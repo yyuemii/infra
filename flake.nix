@@ -4,57 +4,75 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
+    disko-zfs = {
+      url = "github:numtide/disko-zfs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.disko.follows = "disko";
+    };
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    navi = {
+      url = "github:cafkafk/navi";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    opnix.url = "github:brizzbuzz/opnix";
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    opnix = {
+      url = "github:brizzbuzz/opnix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      # all development devices im using are aarch64 based
-      systems = [
+    inputs@{ self, nixpkgs, ... }:
+    let
+      forAllSystems = nixpkgs.lib.genAttrs [
+        # all development systems are aarch64 based
         "aarch64-linux"
         "aarch64-darwin"
       ];
 
-      flake =
+      pkgsFor =
+        system:
+        import nixpkgs {
+          inherit system;
+          overlays = [
+            inputs.opnix.overlays.default
+          ];
+        };
+
+      hive = inputs.navi.lib.makeHive (import ./hosts/default.nix { inherit inputs; });
+    in
+    {
+      # export the hive for navi to use
+      naviHive = hive;
+
+      # fixes an issue with disko not being able properly find it's run script
+      nixosConfigurations = hive.nodes;
+
+      devShells = forAllSystems (
+        system:
         let
-          hosts = import ./hosts { inherit inputs; };
+          pkgs = pkgsFor system;
         in
         {
-          inherit (hosts) nixosConfigurations;
-        };
+          default = pkgs.mkShell {
+            packages = [
+              pkgs.git
+              pkgs.opnix
 
-      perSystem =
-        {
-          config,
-          system,
-          pkgs,
-          ...
-        }:
-        {
-          _module.args.pkgs = import inputs.nixpkgs {
-            inherit system;
-
-            overlays = [
-              inputs.opnix.overlays.default
+              inputs.navi.packages.${system}.navi
             ];
           };
-
-          devShells.default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              nixos-anywhere
-              nixos-rebuild
-
-              opnix
-            ];
-          };
-        };
+        }
+      );
     };
 }

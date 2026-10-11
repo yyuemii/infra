@@ -2,10 +2,10 @@
   "[nix]": {
     "editor.insertSpaces": true,
     "editor.formatOnSave": true,
-    "editor.tabSize": 2,
+    "editor.tabSize": 2
   },
   "[terraform]": {
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": true
   },
   "[yaml]": {
     "editor.formatOnSave": true

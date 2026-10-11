@@ -1,0 +1,7 @@
+{
+  "nymane_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "10.0.10.3"
+  }
+}
