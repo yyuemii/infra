@@ -47,7 +47,6 @@ in
     deployment = {
       provisioner = "bare-metal";
 
-      targetUser = "brianna";
       buildOnTarget = true;
     };
   };

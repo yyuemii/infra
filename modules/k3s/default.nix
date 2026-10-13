@@ -11,6 +11,8 @@
   options.services.lumi.k3s = {
     enable = lib.mkEnableOption "Enable k3s module";
 
+    zfs = lib.mkEnableOption "Enable zfs snapshotter";
+
     fluxcd = {
       enable = lib.mkEnableOption "Enable fluxcd module";
 

@@ -23,6 +23,7 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  boot.zfs.extraPools = [ "tank" ];
   boot.zfs.forceImportRoot = false;
   boot.supportedFilesystems = [ "zfs" ];
 
@@ -165,22 +166,29 @@
               acltype = "posixacl";
               mountpoint = "none";
             };
-            datasets = builtins.listToAttrs (
-              map
-                (name: {
-                  inherit name;
-                  value = {
-                    type = "zfs_fs";
-                    mountpoint = "/srv/${builtins.replaceStrings [ "/" ] [ "/" ] name}";
-                  };
-                })
-                [
-                  "kubernetes"
-                  "kubernetes/volumes"
-                  "kubernetes/databases"
-                  "kubernetes/backups"
-                ]
-            );
+
+            datasets = {
+              "k3s" = {
+                type = "zfs_fs";
+                options.mountpoint = "/var/lib/rancher/k3s";
+              };
+
+              "k3s/storage" = {
+                type = "zfs_fs";
+                options.mountpoint = "/var/lib/rancher/k3s/storage";
+              };
+
+              # use zfs snapshotter for k3s containerd
+              "k3s/containerd" = {
+                type = "zfs_fs";
+                options.mountpoint = "/var/lib/rancher/k3s/agent/containerd/io.containerd.snapshotter.v1.zfs";
+              };
+
+              "kubelet" = {
+                type = "zfs_fs";
+                options.mountpoint = "/var/lib/kubelet";
+              };
+            };
           };
         };
       };

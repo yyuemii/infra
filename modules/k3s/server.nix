@@ -25,7 +25,16 @@ in
       "--tls-san=${config.networking.hostName}.${config.networking.domain}"
       "--cluster-cidr=172.20.0.0/16"
       "--service-cidr=172.21.0.0/16"
-    ];
+      "--snapshotter=zfs"
+    ] ++ (lib.optional cfg.zfs "--snapshotter=zfs");
+  };
+
+  systemd.services.k3s = {
+    # ensure k3s runs after zfs datasets are mounted
+    after = [ "zfs-mount.service" ];
+    requires = [ "zfs-mount.service" ];
+
+    path = [ config.boot.zfs.package ];
   };
 
   # override flannel network to use 172.20.0.0/16 range instead of default 10.42.0.0/24
